@@ -1,21 +1,21 @@
 <?php
-namespace PhpSpec\Laravel;
+namespace PhpSpec\Lumen;
 
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Util\Lumen;
 use PhpSpec\Formatter\Presenter\PresenterInterface;
 
 /**
  * Behaviours that implements this interface should provide a public method
- * with which to bind the Laravel wrapper instance.
+ * with which to bind the Lumen wrapper instance.
  */
-interface LaravelBehaviorInterface
+interface LumenBehaviorInterface
 {
     /**
-     * Bind Laravel wrapper to the implementing object.
+     * Bind Lumen wrapper to the implementing object.
      *
-     * @param \PhpSpec\Laravel\Util\Laravel $laravel Laravel wrapper
+     * @param Lumen $lumen
      */
-    public function setLaravel(Laravel $laravel);
+    public function setLumen(Lumen $lumen);
 
     /**
      * Bind the app Presenter to the implementing object.

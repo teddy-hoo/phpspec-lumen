@@ -1,13 +1,13 @@
 <?php
-namespace PhpSpec\Laravel\Util;
+namespace PhpSpec\Lumen\Util;
 
 use Carbon\Carbon;
 use Laravel\Lumen\Application;
 
 /**
- * This class provides an entry point into Laravel for PhpSpec.
+ * This class provides an entry point into Lumen for PhpSpec.
  */
-class Laravel
+class Lumen
 {
     /**
      * The Illuminate application instance.
@@ -17,14 +17,14 @@ class Laravel
     protected $app;
 
     /**
-     * The Laravel testing environment.
+     * The Lumen testing environment.
      *
      * @var string
      */
     protected $env;
 
     /**
-     * Path to the root of the Laravel application.
+     * Path to the root of the Lumen application.
      *
      * @var string
      */
@@ -33,10 +33,8 @@ class Laravel
     /**
      * Constructor.
      *
-     * @param  string $env     Laravel testing environment. 'testing' by
-     *                         default
-     * @param  string $appPath Path to the Laravel bootstrap dir
-     * @return void
+     * @param  string $env Lumen testing environment. 'testing' by default
+     * @param  string $appPath Path to the Lumen bootstrap dir
      */
     public function __construct($env, $appPath)
     {
@@ -48,7 +46,7 @@ class Laravel
      * Refresh the application instance.
      *
      * @param \Laravel\Lumen\Application $app Optionally provide your own unbooted
-     *                                                Laravel Application instance. This
+     *                                                Lumen Application instance. This
      *                                                parameter can largely be ignored and
      *                                                is used just for unit testing
      * @return void
@@ -59,7 +57,7 @@ class Laravel
     }
 
     /**
-     * Get the Laravel application environment being used.
+     * Get the Lumen application environment being used.
      *
      * @return string Environment name
      */
@@ -69,7 +67,7 @@ class Laravel
     }
 
     /**
-     * @return string Root laravel app path
+     * @return string Root Lumen app path
      */
     public function getAppPath()
     {
@@ -77,7 +75,7 @@ class Laravel
     }
 
     /**
-     * Creates a Laravel application.
+     * Creates a Lumen application.
      *
      * @return \Laravel\Lumen\Application
      */

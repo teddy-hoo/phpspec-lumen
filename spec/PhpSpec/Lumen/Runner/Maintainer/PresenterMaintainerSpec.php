@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\PhpSpec\Laravel\Runner\Maintainer;
+namespace spec\PhpSpec\Lumen\Runner\Maintainer;
 
 use ReflectionClass;
 use ReflectionMethod;

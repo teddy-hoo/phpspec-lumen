@@ -1,12 +1,12 @@
 <?php
 
-namespace spec\PhpSpec\Laravel\Extension;
+namespace spec\PhpSpec\Lumen\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use PhpSpec\ServiceContainer;
 
-class LaravelExtensionSpec extends ObjectBehavior
+class LumenExtensionSpec extends ObjectBehavior
 {
     function let(ServiceContainer $container)
     {
@@ -18,19 +18,19 @@ class LaravelExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('PhpSpec\Extension\ExtensionInterface');
     }
 
-    function it_registers_the_laravel_kernel(ServiceContainer $container)
+    function it_registers_the_lumen_kernel(ServiceContainer $container)
     {
         $container
-            ->setShared('laravel', Argument::type('Closure'))
+            ->setShared('lumen', Argument::type('Closure'))
             ->shouldBeCalled();
 
         $this->load($container);
     }
 
-    function it_registers_the_laravel_maintainer(ServiceContainer $container)
+    function it_registers_the_lumen_maintainer(ServiceContainer $container)
     {
         $container
-            ->setShared('runner.maintainers.laravel', Argument::type('Closure'))
+            ->setShared('runner.maintainers.lumen', Argument::type('Closure'))
             ->shouldBeCalled();
 
         $this->load($container);
@@ -45,10 +45,10 @@ class LaravelExtensionSpec extends ObjectBehavior
         $this->load($container);
     }
 
-    function it_registers_the_laravel_listener(ServiceContainer $container)
+    function it_registers_the_lumen_listener(ServiceContainer $container)
     {
         $container
-            ->setShared('event_dispatcher.listeners.laravel', Argument::type('Closure'))
+            ->setShared('event_dispatcher.listeners.lumen', Argument::type('Closure'))
             ->shouldBeCalled();
 
         $this->load($container);

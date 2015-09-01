@@ -1,41 +1,40 @@
 <?php
-namespace PhpSpec\Laravel\Runner\Maintainer;
+namespace PhpSpec\Lumen\Runner\Maintainer;
 
 use PhpSpec\Loader\Node\ExampleNode;
 use PhpSpec\Runner\CollaboratorManager;
 use PhpSpec\Runner\MatcherManager;
 use PhpSpec\Runner\Maintainer\MaintainerInterface;
 use PhpSpec\SpecificationInterface;
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Util\Lumen;
 
 /**
- * This maintainer is used to bind the Laravel wrapper to nodes that implement
- * the `setLaravel` method.
+ * This maintainer is used to bind the Lumen wrapper to nodes that implement
+ * the `setLumen` method.
  */
-class LaravelMaintainer implements MaintainerInterface
+class LumenMaintainer implements MaintainerInterface
 {
     /**
-     * Laravel wrapper.
+     * Lumen wrapper.
      *
-     * @var \PhpSpec\Laravel\Util\Laravel
+     * @var \PhpSpec\Lumen\Util\Lumen
      */
-    private $laravel;
+    private $lumen;
 
     /**
      * Constructor.
      *
-     * @param  \PhpSpec\Laravel\Util\Laravel $laravel
-     * @return void
+     * @param  \PhpSpec\Lumen\Util\Lumen $lumen
      */
-    public function __construct(Laravel $laravel)
+    public function __construct(Lumen $lumen)
     {
-        $this->laravel = $laravel;
+        $this->lumen = $lumen;
     }
 
     /**
      * Check if this maintainer applies to the given node.
      *
-     * Will check for the `setLaravel` method.
+     * Will check for the `setLumen` method.
      *
      * @param  \PhpSpec\Loader\Node\ExampleNode $example
      * @return boolean
@@ -46,7 +45,7 @@ class LaravelMaintainer implements MaintainerInterface
             $example
                 ->getSpecification()
                 ->getClassReflection()
-                ->hasMethod('setLaravel');
+                ->hasMethod('setLumen');
     }
 
     /**
@@ -59,9 +58,9 @@ class LaravelMaintainer implements MaintainerInterface
             $example
                 ->getSpecification()
                 ->getClassReflection()
-                ->getMethod('setLaravel');
+                ->getMethod('setLumen');
 
-        $reflection->invokeArgs($context, array($this->laravel));
+        $reflection->invokeArgs($context, array($this->lumen));
     }
 
     /**
@@ -73,7 +72,7 @@ class LaravelMaintainer implements MaintainerInterface
     }
 
     /**
-     * Give this maintainer a high priority in the stack to ensure that Laravel
+     * Give this maintainer a high priority in the stack to ensure that Lumen
      * is bootstrapped early.
      *
      * @return int

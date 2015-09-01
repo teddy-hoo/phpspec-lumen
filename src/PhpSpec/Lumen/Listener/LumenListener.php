@@ -1,33 +1,32 @@
 <?php
-namespace PhpSpec\Laravel\Listener;
+namespace PhpSpec\Lumen\Listener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use PhpSpec\Event\SpecificationEvent;
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Util\Lumen;
 
 /**
- * This listener is used to setup the Laravel application for each spec.
+ * This listener is used to setup the Lumen application for each spec.
  *
- * This only applies to specs that implement the LaravelBehaviorInterface.
+ * This only applies to specs that implement the LumenBehaviorInterface.
  */
-class LaravelListener implements EventSubscriberInterface
+class LumenListener implements EventSubscriberInterface
 {
     /**
-     * Laravel wrapper.
+     * Lumen wrapper.
      *
-     * @var \PhpSpec\Laravel\Util\Laravel
+     * @var \PhpSpec\Lumen\Util\Lumen
      */
-    private $laravel;
+    private $lumen;
 
     /**
      * Constructor.
      *
-     * @param  \PhpSpec\Laravel\Util\Laravel $laravel
-     * @return void
+     * @param  \PhpSpec\Lumen\Util\Lumen $lumen
      */
-    public function __construct(Laravel $laravel)
+    public function __construct(Lumen $lumen)
     {
-        $this->laravel = $laravel;
+        $this->lumen = $lumen;
     }
 
     /**
@@ -50,8 +49,8 @@ class LaravelListener implements EventSubscriberInterface
     {
         $spec = $event->getSpecification();
 
-        if ($spec->getClassReflection()->hasMethod('setLaravel')) {
-            $this->laravel->refreshApplication();
+        if ($spec->getClassReflection()->hasMethod('setLumen')) {
+            $this->lumen->refreshApplication();
         }
     }
 }

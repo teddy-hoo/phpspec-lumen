@@ -1,5 +1,5 @@
 <?php
-namespace PhpSpec\Laravel\Runner\Maintainer;
+namespace PhpSpec\Lumen\Runner\Maintainer;
 
 use PhpSpec\Formatter\Presenter\PresenterInterface;
 use PhpSpec\Loader\Node\ExampleNode;
@@ -22,7 +22,6 @@ class PresenterMaintainer implements MaintainerInterface
      * Constructor.
      *
      * @param  \PhpSpec\Formatter\Presenter\PresenterInterface $presenter
-     * @return void
      */
     public function __construct(PresenterInterface $presenter)
     {

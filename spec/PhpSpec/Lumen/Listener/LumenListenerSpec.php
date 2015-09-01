@@ -1,19 +1,19 @@
 <?php
 
-namespace spec\PhpSpec\Laravel\Listener;
+namespace spec\PhpSpec\Lumen\Listener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Util\Lumen;
 use PhpSpec\Event\SpecificationEvent;
 use PhpSpec\Loader\Node\SpecificationNode;
 use ReflectionClass;
 
-class LaravelListenerSpec extends ObjectBehavior
+class LumenListenerSpec extends ObjectBehavior
 {
-    function let(Laravel $laravel)
+    function let(Lumen $lumen)
     {
-        $this->beConstructedWith($laravel);
+        $this->beConstructedWith($lumen);
     }
 
     function it_is_a_listener()
@@ -21,7 +21,7 @@ class LaravelListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_refreshes_the_laravel_framework_before_spec_is_run(Laravel $laravel,
+    function it_refreshes_the_lumen_framework_before_spec_is_run(Lumen $lumen,
                                                                    SpecificationEvent $event,
                                                                    SpecificationNode $spec,
                                                                    ReflectionClass $refl)
@@ -37,11 +37,11 @@ class LaravelListenerSpec extends ObjectBehavior
             ->willReturn($refl);
 
         $refl
-            ->hasMethod('setLaravel')
+            ->hasMethod('setLumen')
             ->shouldBeCalled()
             ->willReturn(true);
 
-        $laravel->refreshApplication()->shouldBeCalled();
+        $lumen->refreshApplication()->shouldBeCalled();
 
         $this->beforeSpecification($event);
     }

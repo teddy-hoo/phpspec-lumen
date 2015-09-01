@@ -1,9 +1,6 @@
 <?php
 
-namespace spec\PhpSpec\Laravel\Runner\Maintainer;
-
-use ReflectionClass;
-use ReflectionMethod;
+namespace spec\PhpSpec\Lumen\Runner\Maintainer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Prophet;
@@ -12,18 +9,17 @@ use Prophecy\Argument;
 use PhpSpec\Loader\Node\ExampleNode;
 use PhpSpec\Runner\CollaboratorManager;
 use PhpSpec\Runner\MatcherManager;
-use PhpSpec\Runner\Maintainer\MaintainerInterface;
 use PhpSpec\SpecificationInterface;
 
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Util\Lumen;
 
-class LaravelMaintainerSpec extends ObjectBehavior
+class LumenMaintainerSpec extends ObjectBehavior
 {
     private $refMethod;
 
-    function let(Laravel $laravel, ExampleNode $example, SpecificationInterface $context)
+    function let(Lumen $lumen, ExampleNode $example, SpecificationInterface $context)
     {
-        $this->beConstructedWith($laravel);
+        $this->beConstructedWith($lumen);
 
         $p = new Prophet;
 
@@ -32,11 +28,11 @@ class LaravelMaintainerSpec extends ObjectBehavior
 
         $refClass = $p->prophesize('ReflectionClass');
 
-        $refClass->hasMethod('setLaravel')->willReturn(true);
-        $refClass->hasMethod('setLaravel')->shouldBeCalled();
+        $refClass->hasMethod('setLumen')->willReturn(true);
+        $refClass->hasMethod('setLumen')->shouldBeCalled();
 
-        $refClass->getMethod('setLaravel')->willReturn($this->refMethod->reveal());
-        $refClass->getMethod('setLaravel')->shouldBeCalled();
+        $refClass->getMethod('setLumen')->willReturn($this->refMethod->reveal());
+        $refClass->getMethod('setLumen')->shouldBeCalled();
 
         $specNode = $p->prophesize('PhpSpec\Loader\Node\SpecificationNode');
         $specNode->getClassReflection()->willReturn($refClass->reveal());
@@ -49,12 +45,12 @@ class LaravelMaintainerSpec extends ObjectBehavior
         $this->shouldHaveType('PhpSpec\Runner\Maintainer\MaintainerInterface');
     }
 
-    function it_supports_objects_with_a_setLaravel_method(ExampleNode $example)
+    function it_supports_objects_with_a_setLumen_method(ExampleNode $example)
     {
         $this->supports($example)->shouldBe(true);
     }
 
-    function it_sets_a_laravel_object_on_a_spec(ExampleNode $example, SpecificationInterface $context, MatcherManager $matchers, CollaboratorManager $collaborators)
+    function it_sets_a_lumen_object_on_a_spec(ExampleNode $example, SpecificationInterface $context, MatcherManager $matchers, CollaboratorManager $collaborators)
     {
         $this->prepare($example, $context, $matchers, $collaborators);
     }

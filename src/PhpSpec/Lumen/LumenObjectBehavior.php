@@ -1,23 +1,23 @@
 <?php
-namespace PhpSpec\Laravel;
+namespace PhpSpec\Lumen;
 
 use PhpSpec\Formatter\Presenter\PresenterInterface;
 use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Subject;
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Util\Lumen;
 
 /**
  * This behavior should be the base behavior for all of your regular PhpSpec
- * behaviors within your Larvel application.
+ * behaviors within your Lumen application.
  */
-class LaravelObjectBehavior extends ObjectBehavior implements LaravelBehaviorInterface
+class LumenObjectBehavior extends ObjectBehavior implements LumenBehaviorInterface
 {
     /**
-     * Laravel wrapper.
+     * Lumen wrapper.
      *
-     * @var \PhpSpec\Laravel\Util\Laravel
+     * @var \PhpSpec\Lumen\Util\Lumen
      */
-    protected $laravel;
+    protected $lumen;
 
     /**
      * App presenter.
@@ -27,14 +27,14 @@ class LaravelObjectBehavior extends ObjectBehavior implements LaravelBehaviorInt
     protected $presenter;
 
     /**
-     * Bind Laravel wrapper to this behavior.
+     * Bind Lumen wrapper to this behavior.
      *
-     * @param  \PhpSpec\Laravel\Util\Laravel $laravel Laravel wrapper
-     * @return \PhpSpec\Laravel\LaravelObjectBehavior This
+     * @param  \PhpSpec\Lumen\Util\Lumen $lumen Lumen wrapper
+     * @return \PhpSpec\Lumen\LumenObjectBehavior This
      */
-    public function setLaravel(Laravel $laravel)
+    public function setLumen(Lumen $lumen)
     {
-        $this->laravel = $laravel;
+        $this->lumen = $lumen;
 
         return $this;
     }
@@ -43,7 +43,7 @@ class LaravelObjectBehavior extends ObjectBehavior implements LaravelBehaviorInt
      * Bind the app Presenter to this behaviour.
      *
      * @param  \PhpSpec\Formatter\Presenter\PresenterInterface $presenter
-     * @return \PhpSpec\Laravel\LaravelObjectBehavior This
+     * @return \PhpSpec\Lumen\LumenObjectBehavior This
      */
     public function setPresenter(PresenterInterface $presenter)
     {

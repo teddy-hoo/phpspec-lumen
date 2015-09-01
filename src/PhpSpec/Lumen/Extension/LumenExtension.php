@@ -1,54 +1,54 @@
 <?php
-namespace PhpSpec\Laravel\Extension;
+namespace PhpSpec\Lumen\Extension;
 
 use InvalidArgumentException;
 use PhpSpec\ServiceContainer;
 use PhpSpec\Extension\ExtensionInterface;
-use PhpSpec\Laravel\Listener\LaravelListener;
-use PhpSpec\Laravel\Runner\Maintainer\LaravelMaintainer;
-use PhpSpec\Laravel\Runner\Maintainer\PresenterMaintainer;
-use PhpSpec\Laravel\Util\Laravel;
+use PhpSpec\Lumen\Listener\LumenListener;
+use PhpSpec\Lumen\Runner\Maintainer\LumenMaintainer;
+use PhpSpec\Lumen\Runner\Maintainer\PresenterMaintainer;
+use PhpSpec\Lumen\Util\Lumen;
 
 /**
- * Setup the Laravel extension.
+ * Setup the Lumen extension.
  *
- * Bootstraps Laravel and sets up some objects in the Container.
+ * Bootstraps Lumen and sets up some objects in the Container.
  */
-class LaravelExtension implements ExtensionInterface
+class LumenExtension implements ExtensionInterface
 {
     /**
-     * Setup the Laravel extension.
+     * Setup the Lumen extension.
      *
      * @param  \PhpSpec\ServiceContainer $container
      * @return void
      */
     public function load(ServiceContainer $container)
     {
-        // Create & store Laravel wrapper
+        // Create & store Lumen wrapper
 
         $container->setShared(
-            'laravel',
+            'lumen',
             function ($c) {
-                $config = $c->getParam('laravel_extension');
+                $config = $c->getParam('lumen_extension');
 
-                $laravel = new Laravel(
+                $lumen = new Lumen(
                     isset($config['testing_environment']) ? $config['testing_environment'] : null,
                     $this->getBootstrapPath(
                         isset($config['framework_path']) ? $config['framework_path'] : null
                     )
                 );
 
-                return $laravel;
+                return $lumen;
             }
         );
 
-        // Bootstrap maintainer to bind Laravel wrapper to specs
+        // Bootstrap maintainer to bind Lumen wrapper to specs
 
         $container->setShared(
-            'runner.maintainers.laravel',
+            'runner.maintainers.lumen',
             function ($c) {
-                return new LaravelMaintainer(
-                    $c->get('laravel')
+                return new LumenMaintainer(
+                    $c->get('lumen')
                 );
             }
         );
@@ -65,12 +65,12 @@ class LaravelExtension implements ExtensionInterface
             }
         );
 
-        // Bootstrap listener to setup Laravel application for specs
+        // Bootstrap listener to setup Lumen application for specs
 
         $container->setShared(
-            'event_dispatcher.listeners.laravel',
+            'event_dispatcher.listeners.lumen',
             function ($c) {
-                return new LaravelListener($c->get('laravel'));
+                return new LumenListener($c->get('lumen'));
             }
         );
     }

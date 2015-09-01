@@ -1,12 +1,12 @@
 <?php
 
-namespace spec\PhpSpec\Laravel\Util;
+namespace spec\PhpSpec\Lumen\Util;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Laravel\Lumen\Application;
 
-class LaravelSpec extends ObjectBehavior
+class LumenSpec extends ObjectBehavior
 {
     private $appInst;
 
