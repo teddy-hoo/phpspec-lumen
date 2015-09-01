@@ -1,8 +1,8 @@
 {
-    "name": "benconstable/phpspec-laravel",
-    "description": "Test your Laravel applications with PhpSpec",
-    "keywords": ["laravel", "phpspec", "testing", "test"],
-    "homepage": "http://github.com/BenConstable/phpspec-laravel",
+    "name": "josborne/phpspec-lumen",
+    "description": "Test your Lumen applications with PhpSpec",
+    "keywords": ["laravel", "phpspec", "testing", "test", "lumen"],
+    "homepage": "https://github.com/josborne/phpspec-lumen",
     "type": "library",
     "authors": [
         {
@@ -14,7 +14,7 @@
     "license": "MIT",
     "require": {
         "phpspec/phpspec": "~2.1",
-        "laravel/framework": "~5.0"
+        "laravel/lumen-framework": "5.1.*"
     },
     "autoload": {
         "psr-0": {

@@ -2,7 +2,7 @@
 namespace PhpSpec\Laravel\Util;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Application;
+use Laravel\Lumen\Application;
 
 /**
  * This class provides an entry point into Laravel for PhpSpec.
@@ -12,7 +12,7 @@ class Laravel
     /**
      * The Illuminate application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Laravel\Lumen\Application
      */
     protected $app;
 
@@ -47,7 +47,7 @@ class Laravel
     /**
      * Refresh the application instance.
      *
-     * @param \Illuminate\Foundation\Application $app Optionally provide your own unbooted
+     * @param \Laravel\Lumen\Application $app Optionally provide your own unbooted
      *                                                Laravel Application instance. This
      *                                                parameter can largely be ignored and
      *                                                is used just for unit testing
@@ -79,7 +79,7 @@ class Laravel
     /**
      * Creates a Laravel application.
      *
-     * @return \Illuminate\Foundation\Application
+     * @return \Laravel\Lumen\Application
      */
     protected function createApplication()
     {

@@ -4,7 +4,7 @@ namespace spec\PhpSpec\Laravel\Util;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Illuminate\Foundation\Application;
+use Laravel\Lumen\Application;
 
 class LaravelSpec extends ObjectBehavior
 {
