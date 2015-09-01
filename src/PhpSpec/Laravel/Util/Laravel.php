@@ -87,17 +87,6 @@ class Laravel
 
         $app = require $this->appPath;
 
-        $app->bootstrapWith(array(
-            'Illuminate\Foundation\Bootstrap\DetectEnvironment',
-            'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-            'Illuminate\Foundation\Bootstrap\ConfigureLogging',
-            'Illuminate\Foundation\Bootstrap\HandleExceptions',
-            'Illuminate\Foundation\Bootstrap\RegisterFacades',
-            'Illuminate\Foundation\Bootstrap\SetRequestForConsole',
-            'Illuminate\Foundation\Bootstrap\RegisterProviders',
-            'Illuminate\Foundation\Bootstrap\BootProviders'
-        ));
-
         Carbon::setTestNow(Carbon::now());
 
         return $app;
