@@ -2,8 +2,8 @@
 namespace PhpSpec\Lumen\Extension;
 
 use InvalidArgumentException;
+use PhpSpec\Extension;
 use PhpSpec\ServiceContainer;
-use PhpSpec\Extension\ExtensionInterface;
 use PhpSpec\Lumen\Listener\LumenListener;
 use PhpSpec\Lumen\Runner\Maintainer\LumenMaintainer;
 use PhpSpec\Lumen\Runner\Maintainer\PresenterMaintainer;
@@ -14,29 +14,26 @@ use PhpSpec\Lumen\Util\Lumen;
  *
  * Bootstraps Lumen and sets up some objects in the Container.
  */
-class LumenExtension implements ExtensionInterface
+class LumenExtension implements Extension
 {
     /**
      * Setup the Lumen extension.
      *
      * @param  \PhpSpec\ServiceContainer $container
+     * @param array $params
      * @return void
      */
-    public function load(ServiceContainer $container)
+    public function load(ServiceContainer $container, array $params=[])
     {
         // Create & store Lumen wrapper
 
-        $container->setShared(
+        $container->define(
             'lumen',
-            function ($c) {
-                $config = $c->getParam('lumen_extension');
-
-                $lumen = new Lumen(
-                    isset($config['testing_environment']) ? $config['testing_environment'] : null,
-                    $this->getBootstrapPath(
-                        isset($config['framework_path']) ? $config['framework_path'] : null
-                    )
-                );
+            function ($c) use ($params) {
+                $appENV = empty($params['testing_environment']) ? null : $params['testing_environment'];
+                $basePath = empty($params['framework_path']) ? null : $params['framework_path'];
+                $basePath = $this->getBootstrapPath($basePath);
+                $lumen = new Lumen($appENV, $basePath);
 
                 return $lumen;
             }
@@ -44,34 +41,37 @@ class LumenExtension implements ExtensionInterface
 
         // Bootstrap maintainer to bind Lumen wrapper to specs
 
-        $container->setShared(
+        $container->define(
             'runner.maintainers.lumen',
-            function ($c) {
+            function (ServiceContainer $c) {
                 return new LumenMaintainer(
                     $c->get('lumen')
                 );
-            }
+            },
+            ['runner.maintainer']
         );
 
         // Bootstrap maintainer to bind app Presenter to specs, so it
         // can be passed to custom matchers
 
-        $container->setShared(
+        $container->define(
             'runner.maintainers.presenter',
             function ($c) {
                 return new PresenterMaintainer(
                     $c->get('formatter.presenter')
                 );
-            }
+            },
+            ['runner.maintainers']
         );
 
         // Bootstrap listener to setup Lumen application for specs
 
-        $container->setShared(
+        $container->define(
             'event_dispatcher.listeners.lumen',
             function ($c) {
                 return new LumenListener($c->get('lumen'));
-            }
+            },
+            ['event_dispatcher.listeners']
         );
     }
 
@@ -84,10 +84,12 @@ class LumenExtension implements ExtensionInterface
     private function getBootstrapPath($path = null)
     {
         if (!$path) {
-            $path = dirname($this->getVendorPath()) . '/bootstrap/app.php';
+            $relPath = DIRECTORY_SEPARATOR . 'bootstrap' . DIRECTORY_SEPARATOR . 'app.php';
+            $path = dirname($this->getVendorPath()) . $relPath;
         } elseif (!$this->isAbsolutePath($path)) {
             $path = $this->getVendorPath() . '/' . $path;
         }
+        $path = 'D:\git\targeting-new\bootstrap\app.php';
 
         if (!is_file($path)) {
             throw new InvalidArgumentException("App bootstrap at `{$path}` not found.");
@@ -114,6 +116,6 @@ class LumenExtension implements ExtensionInterface
      */
     private function getVendorPath()
     {
-        return realpath(__DIR__ . '/../../../../../..');
+        return realpath(__DIR__ . '/../../../../');
     }
 }

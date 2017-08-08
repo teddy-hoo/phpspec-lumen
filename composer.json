@@ -1,33 +1,19 @@
 {
-    "name": "josborne/phpspec-lumen",
+    "name": "eternal/phpspec-lumen",
     "description": "Test your Lumen applications with PhpSpec",
-    "keywords": ["laravel", "phpspec", "testing", "test", "lumen"],
-    "homepage": "https://github.com/josborne/phpspec-lumen",
     "type": "library",
-    "authors": [
-        {
-            "name": "Jamie Osborne",
-            "email": "josborne@rxsavingsllc.com",
-            "homepage": "http://rxsavingssolutions.com"
-        }
-    ],
-    "license": "MIT",
+    "version": "1.0.1",
     "require": {
-        "phpspec/phpspec": "~2.1",
-        "laravel/lumen-framework": "5.1.*"
+        "phpspec/phpspec": "~4.0",
+        "laravel/lumen-framework": "5.4.*"
     },
     "autoload": {
         "psr-0": {
             "PhpSpec": "src/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-laravel-4": "1.x-dev",
-            "dev-master": "2.x-dev"
-        }
-    },
     "config": {
         "bin-dir": "bin"
-    }
+    },
+    "minimum-stability": "dev"
 }
